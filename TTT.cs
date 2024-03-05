@@ -302,7 +302,7 @@ public class TTT : MonoBehaviour
         {
             image.transform.Translate(-1f, 0f, 0f);
             announcementText.gameObject.transform.Translate(-1f, 0f, 0f);
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.00001f);
         }
     }
 
