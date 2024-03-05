@@ -165,6 +165,13 @@ public class AITTT : MonoBehaviour
 
     private int getBestMove(int[] b, int player)
     {
+        //If there is a move that lets the computer win, return it
+        if (canWin(1) != -100) return canWin(1);
+
+
+        //If there is a move that will block the player
+        if (canWin(-1) != -100) return canWin(-1);
+
         //First move is used to not fall into the usual corner trap
         //If it is the first move ...
         if (firstMove)
@@ -196,16 +203,13 @@ public class AITTT : MonoBehaviour
             //Get all of the available corners
             int[] pm = getAllAvailableCorners(board);
 
-            //Randomly return one of the corners
-            return pm[q.getRandI(0, pm.Length - 1)];
+            //If there is an open corner ...
+            if (pm.Length != 0)
+            {
+                //Randomly return one of the corners
+                return pm[q.getRandI(0, pm.Length - 1)];
+            }
         }
-
-        //If there is a move that lets the computer win, return it
-        if (canWin(1) != -100) return canWin(1);
-
-
-        //If there is a move that will block the player
-        if (canWin(-1) != -100) return canWin(-1);
 
         //Use alpha-beta algorithm to choose the next move
         return getBestMove_ab(b, player);
@@ -633,7 +637,7 @@ public class AITTT : MonoBehaviour
         {
             image.transform.Translate(-1f, 0f, 0f);
             announcementText.gameObject.transform.Translate(-1f, 0f, 0f);
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.00001f);
         }
     }
 
